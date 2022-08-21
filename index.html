@@ -5,9 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="index.css" type="text/css">
 </head>
 <body>
+    <div id="flex">
+            <div id="high">
+                <h1>Rock, Paper, Scissors</h1>
+                <div class="choices">
+                    <div id="playerChoice">
+                    </div>
+                    <div id="computerChoice">
+                </div>
+            </div>
+            <div id="low">
+                <h3 id="result"></h3>
+                <h3 id="option">Choose an option! Round number 1</h3>
+                <h3 id="score">Score:</h3>
+                <div id="allChoices">
+                    <div id="rock">
+                    </div>
+                    <div id="paper">
+                    </div>
+                    <div id="scissors">
+                    </div>
+                </div>
+                <div>
+                    <h id="play2Again"2>Click here to play again!</h2>
+                </div>
+            </div>
+    </div>
+
+
+
+
+
     <script>
+
 
         function getComputerChoice() {
             let valueChoice;
@@ -31,10 +64,16 @@
 
         let playerWins = 0;
         let computerWins = 0;
+        let computerSelection;
+        let playerSelection;
+        let roundCounter = 1;
         
         function playRound(playerSelection, computerSelection) {
             playersAnswer = playerSelection.trim().slice(0,1).toUpperCase() + playerSelection.trim().slice(1).toLowerCase();
             let Winner;
+            let computerImage = document.getElementById("computerChoice");
+            let playerImage = document.getElementById("playerChoice");
+            let score = document.getElementById("score");
             switch (true) {
                 case playersAnswer === "Rock" && computerSelection === "Scissors" || playersAnswer === "Scissors" && computerSelection === "Paper" || playersAnswer === "Paper" && computerSelection === "Rock":
                     Winner = "Player wins! Computer loses";
@@ -52,44 +91,168 @@
                     break;
             }
 
-            return Winner;
-        }
-
-        function game() {
-            let numberOfMoreWins;
-            for (let i = 1; i < 6; i++) {
-                playerSelection = prompt(`Round number ${i}: Pick either rock, paper, or scissors`);
-                let computerSelection = getComputerChoice();
-                console.log(playRound(playerSelection, computerSelection));
+            switch (true) {
+                case playersAnswer === "Rock":
+                    playerImage.style.backgroundImage = "url('rock.jpg')"
+                    break;
+                case playersAnswer === "Scissors":
+                    playerImage.style.backgroundImage = "url('scissors.jpg')"
+                    break;
+                case playersAnswer === "Paper":
+                    playerImage.style.backgroundImage = "url('paper.jpg')"
+                    break;
+                default:
+                    break;
             }
 
-            if (playerWins > computerWins) {
-                numberOfMoreWins = playerWins - computerWins;
-                console.log(`In the end, the player was the winner with ${numberOfMoreWins} more wins than the computer!`);
-            } else if (playerWins < computerWins) {
-                numberOfMoreWins = computerWins - playerWins;
-                console.log(`In the end, the computer was the winner with ${numberOfMoreWins} more wins than the player!`);
+            switch (true) {
+                case computerSelection === "Rock":
+                computerImage.style.backgroundImage = "url('rock.jpg')"
+                    break;
+                case computerSelection === "Scissors":
+                computerImage.style.backgroundImage = "url('scissors.jpg')"
+                    break;
+                case computerSelection === "Paper":
+                computerImage.style.backgroundImage = "url('paper.jpg')"
+                    break;
+                default:
+                    break;
+            }
+
+
+            let myResult = document.getElementById("result");
+            myResult.textContent = Winner;
+            score.textContent = `Score: ${playerWins} / ${computerWins}`;
+            roundCounter++
+            myOption.textContent = `Choose an option! Round number ${roundCounter}`;
+
+        }
+
+
+
+        let rockChoice = document.getElementById("rock");
+        let paperChoice = document.getElementById("paper");
+        let scissorChoice = document.getElementById("scissors");
+        let myOption = document.getElementById("option");
+        let playAgain2 = document.getElementById("play2Again");
+        let playAgain = false;
+        let newRound = false;
+
+        rockChoice.addEventListener('click', function() {
+            if (playAgain === true) {
+                newRound = true;
+            }
+
+            playAgain = false;
+
+            
+            if (roundCounter < 5 && newRound === false) {
+                playerSelection = 'rock';
+                computerSelection = getComputerChoice();
+                playRound(playerSelection, computerSelection);
+
             } else {
-                console.log(`In the end it's a tie with both the computer and player getting ${playerWins} wins`);
+                if (playerWins > computerWins && newRound === false) {
+                numberOfMoreWins = playerWins - computerWins;
+                myOption.textContent = `In the end, the player was the winner with ${numberOfMoreWins} more wins than the computer!`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            } else if (playerWins < computerWins && newRound === false) {
+                numberOfMoreWins = computerWins - playerWins;
+                myOption.textContent = `In the end, the computer was the winner with ${numberOfMoreWins} more wins than the player!`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            } else if (newRound === false) {
+                myOption.textContent = `In the end it's a tie with both the computer and player getting ${playerWins} wins`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
             }
 
-        }
+            }
+            }
+        )
+
+        paperChoice.addEventListener('click', function() {
+            if (playAgain === true) {
+                newRound = true;
+            }
+
+            playAgain = false;
+
+            
+            if (roundCounter < 5 && newRound === false) {
+                playerSelection = 'paper';
+                computerSelection = getComputerChoice();
+                playRound(playerSelection, computerSelection);
+
+            } else {
+                if (playerWins > computerWins && newRound === false) {
+                numberOfMoreWins = playerWins - computerWins;
+                myOption.textContent = `In the end, the player was the winner with ${numberOfMoreWins} more wins than the computer!`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            } else if (playerWins < computerWins && newRound === false) {
+                numberOfMoreWins = computerWins - playerWins;
+                myOption.textContent = `In the end, the computer was the winner with ${numberOfMoreWins} more wins than the player!`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            } else if (newRound === false) {
+                myOption.textContent = `In the end it's a tie with both the computer and player getting ${playerWins} wins`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            }
+
+            }
+            }
+        )
         
+
+        scissorChoice.addEventListener('click', function() {
         
-        const thisIsMyArray = ["You","suck","lmao"];
-        thisIsMyArray[2] = "kid";
-        thisIsMyArray.push("fuck");
-        // adds fuck to the end of the array
-        console.log(`${thisIsMyArray[0]} ${thisIsMyArray[1]} ${thisIsMyArray[2]}`);
+            if (playAgain === true) {
+                newRound = true;
+            }
 
-        const iterable = [10, 20, 30];
+            playAgain = false;
 
-        for (let value of iterable) {
-        value += 1;
-        console.log(value);
-        }
+            
+            if (roundCounter < 5 && newRound === false) {
+                playerSelection = 'scissors';
+                computerSelection = getComputerChoice();
+                playRound(playerSelection, computerSelection);
 
-        console.log(iterable[0]);
+            } else {
+                if (playerWins > computerWins && newRound === false) {
+                numberOfMoreWins = playerWins - computerWins;
+                myOption.textContent = `In the end, the player was the winner with ${numberOfMoreWins} more wins than the computer!`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            } else if (playerWins < computerWins && newRound === false) {
+                numberOfMoreWins = computerWins - playerWins;
+                myOption.textContent = `In the end, the computer was the winner with ${numberOfMoreWins} more wins than the player!`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            } else if (newRound === false) {
+                myOption.textContent = `In the end it's a tie with both the computer and player getting ${playerWins} wins`;
+                playAgain = true;
+                playAgain2.style.visibility = 'visible';
+            }
+
+            }
+            }
+        )
+
+        playAgain2.addEventListener('click', function(event) {
+            roundCounter = 1;
+            computerWins = 0;
+            playerWins = 0;
+            myOption.textContent = 'Choose an option! Round number 1';
+            score.textContent = 'Score: 0/0';
+            newRound = false;
+            playAgain = false;
+            event.target.style.visibility = 'hidden';
+        } )
+     
 
 
 

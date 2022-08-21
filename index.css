@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: gray;
+}
+
+h1 {
+    text-align: center;
+}
+
+#flex {
+    display: flex;
+    justify-content: center;
+
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+}
+
+#low {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allChoices {
+    display: flex;
+
+}
+
+#rock,
+#paper,
+#scissors,
+#playerChoice,
+#computerChoice{
+    border: 3px solid black;
+    border-radius: 25px;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center; 
+}
+
+#rock {
+    background-image: url(rock.jpg);
+}
+
+#paper {
+    background-image: url(paper.jpg);
+}
+
+#scissors {
+    background-image: url(scissors.jpg);
+}
+
+#rock:hover,
+#paper:hover,
+#scissors:hover,
+#play2Again:hover {
+    cursor: pointer;
+    padding: 5px;
+}
+
+#rock:active,
+#paper:active,
+#scissors:active{
+    margin-top: 5px;
+}
+
+#play2Again {
+    visibility: hidden;
+    margin-top: 15px;
+}
+
